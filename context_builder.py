@@ -1,20 +1,5 @@
-"""
-context_builder.py
-
-Combines the user's financial profile and their purchase question (with
-price) into one clean block of text, ready to be handed to an AI persona.
-Pure logic only -- no API calls happen in this file.
-"""
-
-
 def build_context(profile, question, price=None):
-    """
-    profile: a dictionary loaded from profile.json
-    question: a string, e.g. "Should I buy a new laptop?"
-    price: optional float, the purchase price, if known
-
-    Returns a single string combining both, in plain English.
-    """
+    
     disposable_income = profile["monthly_income"] - profile["monthly_expenses"]
 
     context = (
