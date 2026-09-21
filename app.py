@@ -13,7 +13,6 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-only-change-me")
 
 
 def render_markdown(text):
-    """Converts the AI's Markdown-formatted text into safe HTML for display."""
     return markdown.markdown(text)
 
 
