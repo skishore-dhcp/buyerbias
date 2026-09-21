@@ -1,10 +1,3 @@
-"""
-personas.py
-
-Contains the AI personas that argue for or against a purchase decision.
-Each persona is a system instruction (personality) + a call to llm_client.
-"""
-
 from llm_client import get_response
 
 IMPULSE_BUYER_INSTRUCTION = """You are an persuasive friend who encourages people's purchases. Given the user's financial context and the purchase they're considering, make the strongest case FOR making the purchase.
@@ -28,10 +21,7 @@ Be firm but not preachy -- don't invent facts that weren't given to you. Keep th
 
 
 def get_impulse_buyer_argument(context):
-    """
-    context: the combined profile + question text from build_context()
-    Returns the Impulse Buyer's argument as a string.
-    """
+
     return get_response(
         prompt=context,
         system_instruction=IMPULSE_BUYER_INSTRUCTION,
@@ -39,10 +29,7 @@ def get_impulse_buyer_argument(context):
 
 
 def get_frugal_advisor_argument(context):
-    """
-    context: the combined profile + question text from build_context()
-    Returns the Frugal Advisor's argument as a string.
-    """
+
     return get_response(
         prompt=context,
         system_instruction=FRUGAL_ADVISOR_INSTRUCTION,
