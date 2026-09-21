@@ -1,11 +1,3 @@
-"""
-judge.py
-
-Takes both personas' arguments and synthesizes a final, balanced report.
-The judge does NOT tell the user what to do -- it weighs both sides and
-hands the decision back to the user, fully informed.
-"""
-
 from llm_client import get_response
 
 JUDGE_INSTRUCTION = """You are a neutral, balanced financial advisor. You have been given two arguments about a purchase decision -- one in favor, one against -- along with the user's financial context.
@@ -20,13 +12,7 @@ Keep the whole response under 150 words. Be honest and grounded, not wishy-washy
 
 
 def get_verdict(context, impulse_argument, frugal_argument):
-    """
-    context: the combined profile + question text from build_context()
-    impulse_argument: string returned by get_impulse_buyer_argument()
-    frugal_argument: string returned by get_frugal_advisor_argument()
 
-    Returns the judge's synthesized summary as a string.
-    """
     judge_prompt = (
         f"{context}\n"
         f"Here is the argument IN FAVOR of the purchase:\n{impulse_argument}\n\n"
