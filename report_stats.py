@@ -1,20 +1,7 @@
-"""
-report_stats.py
-
-Pure computation: turns the profile + purchase price into the numeric
-comparisons and a simple pie chart (as raw SVG) for the report page.
-No API calls happen here.
-"""
-
 import math
 
-
 def compute_stats(profile, price):
-    """
-    profile: the financial profile dict
-    price: the purchase price as a float
-    Returns a dict of numbers ready to display in the report.
-    """
+
     income = profile["monthly_income"]
     expenses = profile["monthly_expenses"]
     savings = profile["current_savings"]
@@ -34,11 +21,7 @@ def compute_stats(profile, price):
 
 
 def build_donut_chart(price, current_savings, size=150, stroke_width=20):
-    """
-    Builds a simple two-slice donut chart as raw SVG, showing how much of
-    current savings the purchase would take up.
-    Returns an SVG string, ready to insert with the |safe filter.
-    """
+
     remaining = max(current_savings - price, 0)
     total = price + remaining if (price + remaining) > 0 else 1
 
