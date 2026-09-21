@@ -1,11 +1,3 @@
-"""
-app.py
-
-Flask entry point for BuyerBias. Same pipeline as main.py, wired to a
-three-step web flow instead of terminal input:
-profile_form -> question -> report.
-"""
-
 import os
 import markdown
 from flask import Flask, render_template, request, redirect, url_for, session
