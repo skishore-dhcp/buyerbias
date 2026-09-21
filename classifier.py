@@ -6,10 +6,7 @@ Reply with exactly one word: YES or NO. Nothing else -- no punctuation, no expla
 
 
 def is_purchase_question(question):
-    """
-    question: a string, the user's raw input.
-    Returns True if it's a purchase decision question, False otherwise.
-    """
+
     answer = get_response(
         prompt=question,
         system_instruction=CLASSIFIER_INSTRUCTION,
