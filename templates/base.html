@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}BuyerBias{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{ url_for('profile_form') }}">BuyerBias</a>
+    <p class="site-tag">A second opinion before you spend</p>
+  </header>
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>AI is a tool, not a substitute brain — the decision stays yours.</p>
+  </footer>
+</body>
+</html>

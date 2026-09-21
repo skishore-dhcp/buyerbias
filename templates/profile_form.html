@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}BuyerBias — Your finances{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Tell us about your finances</h1>
+  <p class="lede">This grounds the debate in your real numbers instead of generic advice.</p>
+
+  <form method="POST" class="stacked-form">
+    <label for="monthly_income">Monthly income</label>
+    <input type="number" id="monthly_income" name="monthly_income"
+           value="{{ profile.monthly_income if profile else '' }}" required>
+
+    <label for="monthly_expenses">Monthly expenses</label>
+    <input type="number" id="monthly_expenses" name="monthly_expenses"
+           value="{{ profile.monthly_expenses if profile else '' }}" required>
+
+    <label for="current_savings">Current savings</label>
+    <input type="number" id="current_savings" name="current_savings"
+           value="{{ profile.current_savings if profile else '' }}" required>
+
+    <label for="savings_goal">Savings goal</label>
+    <input type="text" id="savings_goal" name="savings_goal"
+           value="{{ profile.savings_goal if profile else '' }}"
+           placeholder="e.g. House down payment: $20,000 by Dec 2027" required>
+
+    <label for="recent_spending_note">Recent spending pattern</label>
+    <input type="text" id="recent_spending_note" name="recent_spending_note"
+           value="{{ profile.recent_spending_note if profile else '' }}"
+           placeholder="e.g. Dining out increased about 15% last month" required>
+
+    <button type="submit" class="btn btn-primary">Continue</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}BuyerBias — Report{% endblock %}
+{% block content %}
+
+<div class="report-doc" id="report-content">
+  <header class="report-head">
+    <p class="report-brand">BuyerBias report</p>
+    <h1>{{ question }}</h1>
+    <p class="report-price">Price under consideration: ${{ "%.2f"|format(price) }}</p>
+  </header>
+
+  <section class="report-numbers">
+    <div class="stat">
+      <span class="stat-label">Monthly income</span>
+      <span class="stat-value">${{ "%.0f"|format(profile.monthly_income) }}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Monthly expenses</span>
+      <span class="stat-value">${{ "%.0f"|format(profile.monthly_expenses) }}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Disposable income</span>
+      <span class="stat-value">${{ "%.0f"|format(stats.disposable_income) }}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Current savings</span>
+      <span class="stat-value">${{ "%.0f"|format(profile.current_savings) }}</span>
+    </div>
+    {% if stats.pct_of_savings is not none %}
+    <div class="stat highlight">
+      <span class="stat-label">% of savings</span>
+      <span class="stat-value">{{ stats.pct_of_savings }}%</span>
+    </div>
+    {% endif %}
+    {% if stats.months_needed is not none %}
+    <div class="stat highlight">
+      <span class="stat-label">Months of disposable income</span>
+      <span class="stat-value">{{ stats.months_needed }}</span>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="report-chart">
+    {{ chart_svg | safe }}
+    <ul class="chart-legend">
+      <li><span class="dot dot-impulse"></span> This purchase</li>
+      <li><span class="dot dot-frugal"></span> Remaining savings</li>
+    </ul>
+  </section>
+
+  <section class="report-debate">
+    <div class="report-col report-col-impulse">
+      <h2>Case for</h2>
+      {{ impulse_argument | safe }}
+    </div>
+    <div class="report-col report-col-frugal">
+      <h2>Case against</h2>
+      {{ frugal_argument | safe }}
+    </div>
+  </section>
+
+  <section class="report-verdict">
+    <h2>Verdict</h2>
+    {{ verdict | safe }}
+  </section>
+</div>
+
+<div class="actions no-print">
+  <button class="btn btn-secondary" id="copy-btn" type="button">Copy report</button>
+  <button class="btn btn-primary" id="download-btn" type="button">Download / Print</button>
+  <a class="btn btn-secondary" href="{{ url_for('question') }}">Ask about another purchase</a>
+</div>
+
+<script>
+  document.getElementById('download-btn').addEventListener('click', function () {
+    window.print();
+  });
+
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    const text = document.getElementById('report-content').innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      const btn = document.getElementById('copy-btn');
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = original; }, 1500);
+    });
+  });
+</script>
+{% endblock %}

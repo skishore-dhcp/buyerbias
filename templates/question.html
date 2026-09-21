@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}BuyerBias — Your question{% endblock %}
+{% block content %}
+<section class="panel panel-centered">
+  <h1>What are you considering buying?</h1>
+  <p class="lede">Describe the purchase and its price — the more specific, the sharper the debate.</p>
+
+  {% if error %}
+  <p class="error">{{ error }}</p>
+  {% endif %}
+
+  <form method="POST" class="inline-form">
+    <input type="text" name="question" value="{{ question if question else '' }}"
+           placeholder="e.g. Should I buy a new laptop?" required autofocus>
+    <input type="number" name="price" class="price-input" step="0.01" min="0"
+           value="{{ price if price else '' }}" placeholder="Price ($)" required>
+    <button type="submit" class="btn btn-primary">Ask</button>
+  </form>
+
+  <a class="link-muted" href="{{ url_for('profile_form') }}">Edit your financial details</a>
+</section>
+{% endblock %}
